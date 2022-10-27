@@ -8,6 +8,7 @@ import os
 sys.path.append('../../')
 import data_processor as dtp  # nopep8
 
+
 class TestData(unittest.TestCase):
 
     @classmethod
@@ -23,10 +24,10 @@ class TestData(unittest.TestCase):
         cls.wrong_matrix = np.random.rand(cls.N, cls.M)
         os.mkdir("test_files")
         pd.DataFrame(cls.random_matrix).to_csv(
-            "test_files/random.csv", header = None)
+            "test_files/random.csv", header=None)
         pd.DataFrame(cls.wrong_matrix).to_csv(
-            "test_files/wrong.csv", header = None)
-         
+            "test_files/wrong.csv", header=None)
+
     @classmethod
     def tearDownClass(cls):
         print("Running tearDownClass")

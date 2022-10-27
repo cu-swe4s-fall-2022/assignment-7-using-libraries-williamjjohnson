@@ -48,5 +48,5 @@ def write_matrix_to_file(
     '''
     df = get_random_matrix(
         num_rows, num_columns, rand_seed)
-    pd.DataFrame(df).to_csv(file_name, header = None)
+    pd.DataFrame(df).to_csv(file_name, header=None)
     return None
