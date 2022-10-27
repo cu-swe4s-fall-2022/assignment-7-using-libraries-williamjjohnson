@@ -22,9 +22,9 @@ class TestData(unittest.TestCase):
         np.random.seed(cls.wrong_seed)
         cls.wrong_matrix = np.random.rand(cls.N, cls.M)
         pd.DataFrame(cls.random_matrix).to_csv(
-            "test_files/random.csv", header = False)
+            "test_files/random.csv", header = None)
         pd.DataFrame(cls.wrong_matrix).to_csv(
-            "test_files/wrong.csv", header = False)
+            "test_files/wrong.csv", header = None)
          
     @classmethod
     def tearDownClass(cls):
@@ -60,8 +60,8 @@ class TestData(unittest.TestCase):
         self.assertNotEqual(dimensions, 10, 15)
 
     def test_write_matrix_to_file(self):
-        write_matrix_to_file(
-            self.N, self.M, self.rand_seed, "test_files/test.csv")
+        dtp.write_matrix_to_file(
+            self.N, self.M, "test_files/test.csv", self.rand_seed)
 
         # positive test : test that the correct file is written
         self.assertTrue(
@@ -69,7 +69,7 @@ class TestData(unittest.TestCase):
 
         # negative test : test that an incorrect file doesn't equal
         # the written file
-        self.assertNotTrue(
+        self.assertFalse(
             filecmp.cmp("test_files/test.csv", "test_files/wrong.csv"))
 
 
