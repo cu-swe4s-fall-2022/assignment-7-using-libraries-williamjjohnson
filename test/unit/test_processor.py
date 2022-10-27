@@ -35,8 +35,8 @@ class TestProcessor(unittest.TestCase):
         self.assertRaises(Exception, dtp.get_random_matrix, -12, -1)
 
     def test_get_file_dimesions(self):
-        csv_name = "iris.data"
-        dimensions = get_file_dimensions(csv_name)
+        csv_name = "../../iris.data"
+        dimensions = dtp.get_file_dimensions(csv_name)
 
         # positive test : test that the correct dimensions are returned
         self.assertEqual(dimensions, (150, 5))
