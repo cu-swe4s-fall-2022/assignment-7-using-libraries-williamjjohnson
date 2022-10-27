@@ -21,6 +21,7 @@ class TestData(unittest.TestCase):
         cls.random_matrix = np.random.rand(cls.N, cls.M)
         np.random.seed(cls.wrong_seed)
         cls.wrong_matrix = np.random.rand(cls.N, cls.M)
+        os.mkdir("test_files")
         pd.DataFrame(cls.random_matrix).to_csv(
             "test_files/random.csv", header = None)
         pd.DataFrame(cls.wrong_matrix).to_csv(
@@ -32,6 +33,7 @@ class TestData(unittest.TestCase):
         dir = "./test_files/"
         for f in os.listdir(dir):
             os.remove(os.path.join(dir, f))
+        os.rmdir("test_files")
 
     def test_get_random_matrix(self):
         test_matrix = dtp.get_random_matrix(self.N, self.M, self.rand_seed)
