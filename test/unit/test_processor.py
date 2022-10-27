@@ -14,20 +14,24 @@ class TestProcessor(unittest.TestCase):
 #	def tearDownClass(cls):
 
 	def test_get_random_matrix(self):
-		np.random.seed(17)
+		rand_seed = random.randint(1, 100)
+		# ensure different matrices for negative test with wrong_seed
+		wrong_seed = random.randint(rand_seed + 1, rand_seed + 50)
 		N = random.randint(1, 10)
-		# ensure N and M are different for negative test
-		M = random.randint(N + 1, N + 11)
+		M = random.randint(1, 10)
+		test_matrix = dtp.get_random_matrix(N, M, rand_seed)
 
+		np.random.seed(rand_seed)
 		random_matrix = np.random.rand(N, M)
-		wrong_matrix = np.random.rand(M, N)
+		np.random.seed(wrong_seed)
+		wrong_matrix = np.random.rand(N, M)
 
 		# positive test : test that the correct matrix is returned
-		self.assertEqual(random_matrix.all(), dtp.get_random_matrix(N, M).all())
+		self.assertTrue(np.all(np.equal(test_matrix, random_matrix)))
 
 		# negative test : test that the returned matrix doesn't
 		# equal another matrix
-		self.assertNotEqual(wrong_matrix.all(), dtp.get_random_matrix(M, N).all())
+		self.assertTrue(np.any(np.not_equal(test_matrix, wrong_matrix)))
 
 		# exception test : test that an exception is raised if
 		# N and M are not integers or less than zero
